@@ -11,8 +11,8 @@ python br_lab.py publish $(EXP)
 python scripts/postbuild.py
 
 lint:
-ruff .
-yamllint experiments
+	ruff .
+	yamllint experiments
 
 format:
 black .
