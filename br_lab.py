@@ -44,7 +44,7 @@ def publish_notebook(nb_path: pathlib.Path) -> None:
         )
     except FileNotFoundError as err:
         raise click.ClickException(
-            "jupyter command not found. Please install jupyter with: pip install jupyter"
+            "jupyter command not found. Please install jupyter with: pip install jupyter nbconvert"
         ) from err
     except subprocess.CalledProcessError as e:
         raise click.ClickException(f"Failed to convert notebook: {e}") from e
