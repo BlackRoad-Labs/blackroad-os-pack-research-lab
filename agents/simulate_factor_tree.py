@@ -29,10 +29,17 @@ def build_summary(samples: int) -> Dict[str, float]:
 
 
 def main(raw_cfg: str) -> None:
-    cfg = json.loads(raw_cfg)
+    try:
+        cfg = json.loads(raw_cfg)
+    except json.JSONDecodeError as e:
+        print(f"Error: Provided argument is not valid JSON: {e}", file=sys.stderr)
+        sys.exit(1)
     summary = build_summary(samples=25)
     save_notebook_artifact(cfg["notebook"], {"summary": summary, "cfg": cfg})
 
 
 if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python simulate_factor_tree.py '<json_config>'", file=sys.stderr)
+        sys.exit(1)
     main(sys.argv[1])
